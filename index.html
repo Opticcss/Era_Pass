@@ -12,9 +12,9 @@
         
     </title>
 
-    <link rel="stylesheet" href="/Era_Pass/css/main.css">
-    <link rel="canonical" href="http://localhost:9999/Era_Pass/" />
-    <link rel="icon" href="/Era_Pass/static/img/favicon.ico" />
+    <link rel="stylesheet" href="/Era_Pass//css/main.css">
+    <link rel="canonical" href="http://localhost:4000/Era_Pass//" />
+    <link rel="icon" href="/Era_Pass//static/img/favicon.ico" />
 
     <!-- MathJax formula supporting -->
 <style>
@@ -72,37 +72,99 @@
     TeX: { equationNumbers: { autoNumber: "AMS" } }
   });
   </script>
+
+    <!-- for the darkmode toolboxes -->
+    <script src="https://cdn.jsdelivr.net/npm/darkreader@4.9.44/darkreader.js"></script>
+    <!-- for importing sun/moon buttons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 
   <body>
     <!-- navigation bar loaded automatically -->
-<aside>
-    <div class="container">
-        <nav>
-            <img class="logo" src="/Era_Pass/static/img/logo.jpg" alt="Jinzhao Li Small Logo"/>
-            <ul>
-                
-                
-                
-                
-                <li><a href="/Era_Pass/">About</a></li>
-                
-                
-                
-                
-                
-                
-                <li><a href="/Era_Pass/blog">Blog</a></li>
-            </ul>
+<div id="navigation_bartop">
+    <nav>
+        <!--
+            <img class="logo" src="/Era_Pass//static/img/logo.jpg" alt="Jinzhao Li Small Logo" />
+        -->
+        <ul>
+            <li><div id="name_bartop"><b>Li</b>&emsp13;Jinzhao</div></li>
+            <li><a href="/Era_Pass//about.html">about</a></li>
+            <li><a href="/Era_Pass//blog.html">blog</a></li>
+            <li><a href="/Era_Pass//publications.html">publications</a></li>
+            <li><a href="/Era_Pass//projects.html">projects</a></li>
+            <li><a href="/Era_Pass//cv.html">cv</a></li>
+            <li>
+                <a class="dark-mode-button">
+                    <i id="icon-dark" class="fa fa-moon" style="display: none;"></i>
+                    <i id="icon-light" class="fa fa-sun"></i>
+                </a>
             </li>
-            </ul>
-        </nav>
-    </div>
-</aside>
+            <script>
+                document.getElementsByClassName('dark-mode-button')[0].onclick = function () {
+                    let enabled = localStorage.getItem('dark-mode');
+                    const iconDark = document.getElementById('icon-dark');
+                    const iconLight = document.getElementById('icon-light');
+
+                    if (enabled === null) {
+                        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                            DarkReader.setFetchMethod(window.fetch)
+                            DarkReader.enable();
+                            localStorage.setItem('dark-mode', 'true');
+                        }
+                    } else if (enabled === 'true') {
+                        DarkReader.setFetchMethod(window.fetch)
+                        DarkReader.enable();
+                        localStorage.setItem('dark-mode', 'true');
+                    }
+
+                    if (localStorage.getItem('dark-mode') === 'false') {
+                        DarkReader.setFetchMethod(window.fetch)
+                        DarkReader.enable();
+                        localStorage.setItem('dark-mode', 'true');
+                    } else {
+                        DarkReader.disable();
+                        localStorage.setItem('dark-mode', 'false');
+                    }
+
+                    // toggle icons
+                    if (localStorage.getItem('dark-mode') === 'true') {
+                        iconDark.style.display = 'inline';
+                        iconLight.style.display = 'none';
+                    } else {
+                        iconDark.style.display = 'none';
+                        iconLight.style.display = 'inline';
+                    }
+                }
+            </script>
+        </ul>
+    </nav>
+</div>
+
+<div id="scroll-progress"></div>
+<script>
+    var scrollProgress = document.getElementById('scroll-progress');
+    var requestId;
+
+    function updateScrollProgress() {
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+        var progress = (scrollTop / (scrollHeight - window.innerHeight)) * 100;
+        scrollProgress.style.width = progress + '%';
+        requestId = null;
+    }
+
+    function scrollHandler() {
+        if (!requestId) {
+            requestId = requestAnimationFrame(updateScrollProgress);
+        }
+    }
+
+    window.addEventListener('scroll', scrollHandler);
+</script>
 
 <!-- header as the basic title -->
 <header>
-    <h1><a href="/Era_Pass">Li Jinzhao</a></h1>
+    <h1><a href="/Era_Pass/">Li Jinzhao</a></h1>
 </header>
     <main>
       <article><h2>About</h2>
@@ -110,6 +172,94 @@
 <p>About content goes here.</p>
 
 <ul>
+  <li>A list item</li>
+  <li>
+    <p>Another list item</p>
+  </li>
+  <li>A list item</li>
+  <li>
+    <p>Another list item</p>
+  </li>
+  <li>A list item</li>
+  <li>
+    <p>Another list item</p>
+  </li>
+  <li>A list item</li>
+  <li>
+    <p>Another list item</p>
+  </li>
+  <li>A list item</li>
+  <li>
+    <p>Another list item</p>
+  </li>
+  <li>A list item</li>
+  <li>
+    <p>Another list item</p>
+  </li>
+  <li>A list item</li>
+  <li>
+    <p>Another list item</p>
+  </li>
+  <li>A list item</li>
+  <li>
+    <p>Another list item</p>
+  </li>
+  <li>A list item</li>
+  <li>
+    <p>Another list item</p>
+  </li>
+  <li>A list item</li>
+  <li>
+    <p>Another list item</p>
+  </li>
+  <li>A list item</li>
+  <li>
+    <p>Another list item</p>
+  </li>
+  <li>A list item</li>
+  <li>
+    <p>Another list item</p>
+  </li>
+  <li>A list item</li>
+  <li>
+    <p>Another list item</p>
+  </li>
+  <li>A list item</li>
+  <li>
+    <p>Another list item</p>
+  </li>
+  <li>A list item</li>
+  <li>
+    <p>Another list item</p>
+  </li>
+  <li>A list item</li>
+  <li>
+    <p>Another list item</p>
+  </li>
+  <li>A list item</li>
+  <li>
+    <p>Another list item</p>
+  </li>
+  <li>A list item</li>
+  <li>
+    <p>Another list item</p>
+  </li>
+  <li>A list item</li>
+  <li>
+    <p>Another list item</p>
+  </li>
+  <li>A list item</li>
+  <li>
+    <p>Another list item</p>
+  </li>
+  <li>A list item</li>
+  <li>
+    <p>Another list item</p>
+  </li>
+  <li>A list item</li>
+  <li>
+    <p>Another list item</p>
+  </li>
   <li>A list item</li>
   <li>Another list item</li>
 </ul>
@@ -127,7 +277,7 @@
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
-    hits (Wed, 15 May 2024 00:42:42 +0800).
+    hits (Thu, 16 May 2024 12:00:23 +0800).
 </footer>
     </main>
   </body>

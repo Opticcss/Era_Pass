@@ -1,6 +1,119 @@
-<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="/scripts/pretty-feed-v3.xsl" type="text/xsl"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:h="http://www.w3.org/TR/html4/"><channel><title>OpticCss&apos; erapass</title><description>The place to share research life.</description><link>https://opticcss.github.io</link><item><title>开头 | erapass 建站手册</title><link>https://opticcss.github.io/blog/z_zz_initial-step_building-erapass</link><guid isPermaLink="true">https://opticcss.github.io/blog/z_zz_initial-step_building-erapass</guid><description>今晚站点的编译环境崩了 | 一周努力白费 | 重开的同时留个念想 | 方便以后从头再来.</description><pubDate>Mon, 29 Jun 2026 19:47:22 GMT</pubDate><content:encoded>&lt;h2&gt;基本语法&lt;/h2&gt;
-&lt;p&gt;Markdown 是一种轻量级且易于使用的语法，用于为您的写作设计风格。&lt;/p&gt;
-&lt;h3&gt;个人简历 · PDFjs 阅读容器部件&lt;/h3&gt;
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="/scripts/pretty-feed-v3.xsl" type="text/xsl"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:h="http://www.w3.org/TR/html4/"><channel><title>OpticCss&apos; erapass</title><description>Mapping personal academic research, insights, life, and my signals onto the time-frequency plane. Dedicated to fellow signal processing enthusiasts.</description><link>https://opticcss.github.io</link><item><title>开头 | erapass 建站手册</title><link>https://opticcss.github.io/blog/z_zz_initial-step_building-erapass</link><guid isPermaLink="true">https://opticcss.github.io/blog/z_zz_initial-step_building-erapass</guid><description>今晚站点的编译环境崩了 | 一周努力白费 | 重开的同时留个念想 | 方便以后从头再来.</description><pubDate>Mon, 29 Jun 2026 19:47:22 GMT</pubDate><content:encoded>&lt;p&gt;import { Collapse, Aside, Spoiler, Icon, Button, Svg, Steps, Tabs, TabItem } from &apos;astro-pure/user&apos;
+import { Icons as allIcons } from &apos;astro-pure/libs&apos;&lt;/p&gt;
+&lt;p&gt;import { Quote, GithubCard, LinkPreview } from &apos;astro-pure/advanced&apos;&lt;/p&gt;
+&lt;p&gt;当前个人网站经过了多次迭代, 是典型的静态网页, 依靠本地编译生成, 并基于 &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt; 进行部署. 这类网站完全免费且不需要任何数据库支持, 但具有如下几个缺点,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;占用空间限制: space should not be greater than 1 G.&lt;/li&gt;
+&lt;li&gt;流量限制: monthly flow should not be greater than 100 G.&lt;/li&gt;
+&lt;li&gt;更新次数限制: cannot be updated 10 times per hour.&lt;/li&gt;
+&lt;li&gt;自定义功能限制: cannot be equipped with comment function (this can be complemented by third-party services).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;尽管如此, 静态网页带来了更多好处, 成为个人网站项目的首选.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意, 静态网页只由 plain HTML 文件构成, 不同于由 PHP 生成的动态网页, 静态网页对于每个用户都展示相同的界面. 这也帮助没有数据库编程经验的人仅依靠 HTML/CSS 知识完成建站.&lt;/p&gt;
+&lt;p&gt;此类网站一般加载得更快, 因为服务器不需要解析任何内容, 只是读取 plain HTML 文件. 其与动态网页的优劣区别需结合实际应用权衡.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;网站选取 &lt;a href=&quot;https://astro.build/&quot;&gt;Astro&lt;/a&gt; 高效能网络框架作为静态站点生成器 (static site generator, SSG), 它是首个普及群岛架构 (islands architecture) 的框架, 大幅减少了用户端负担从而提升网页的初始加载性能, 开发者可在 Astro 中对同一专案同时使用如 &lt;a href=&quot;https://zh-hans.react.dev/&quot;&gt;React&lt;/a&gt; 和 &lt;a href=&quot;https://cn.vuejs.org/&quot;&gt;Vue&lt;/a&gt; 等多种 UI 框架.&lt;/p&gt;
+&lt;p&gt;个人网页平台利用 markdown 以及 &lt;a href=&quot;https://mdxjs.com/&quot;&gt;Markdown for the component era&lt;/a&gt; (MDX) 编写的文章生成对应网页, 并支持通过 Vite 使用如 Sass 等 CSS 预处理器, 将脚本解析成 CSS. Astro 可以看作一类内容管理系统 (content management system, CMS, 可作 client 使用), 能够加载自定义 layout 文件以及对应 &lt;code&gt;.md&lt;/code&gt; 与 &lt;code&gt;.mdx&lt;/code&gt; 文件到每一网页中, 从而节约重写次数.&lt;/p&gt;
+&lt;p&gt;具体地, 本项目基于 Astro 构建, 支持 Markdown, MDX, 组件化开发, 并集成搜索, 标签, 评论等功能, 以下为项目文件结构.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;src/&lt;/code&gt; 源代码主目录. 用户的主要工作区, 包含页面, 组件, 内容和样式.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;src/pages/&lt;/code&gt; 页面路由. 每个 &lt;code&gt;.astro&lt;/code&gt;、&lt;code&gt;.md&lt;/code&gt;、&lt;code&gt;.mdx&lt;/code&gt; 文件会自动生成对应的路由 (如 &lt;code&gt;pages/about/index.astro&lt;/code&gt; $\to$ &lt;code&gt;/about&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;src/content/&lt;/code&gt; 内容集合. 包含博客 (&lt;code&gt;blog/&lt;/code&gt;, 每篇文章可包含标题, 日期, 标签等 Frontmatter), 其它文档等.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;src/components/&lt;/code&gt; 可复用 UI 组件. 按功能模块划分为 &lt;code&gt;about/&lt;/code&gt;, &lt;code&gt;home/&lt;/code&gt;, &lt;code&gt;links/&lt;/code&gt;, &lt;code&gt;projects/&lt;/code&gt;, &lt;code&gt;waline/&lt;/code&gt; 评论组件 (文件类型 &lt;code&gt;.astro/.jsx/.tsx&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;src/layouts/&lt;/code&gt; 页面布局. 定义全局页面结构 (头部, 底部, 侧边栏).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;src/assets/&lt;/code&gt; 静态资源. 图片, 字体, 图标, 样式文件等.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;public/&lt;/code&gt; 公共静态资源. 直接映射到网站根目录的 &lt;code&gt;/favicon/&lt;/code&gt;, &lt;code&gt;/images/&lt;/code&gt;, &lt;code&gt;/scripts/&lt;/code&gt; 等资源.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;dist/&lt;/code&gt; 构建输出目录. 为运行 &lt;code&gt;npm run build&lt;/code&gt; 后生成的用于部署的静态文件 (包含所有页面, 资源, 搜索索引等).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;packages/pure/&lt;/code&gt; 本地核心模块, 与主项目解耦.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;node_modules/astro-pure&lt;/code&gt; 主项目核心模块.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;astro.config.ts&lt;/code&gt; Astro 根目录配置文件. 用于配置站点 URL, 构建选项, 集成, Vite 设置等.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;① 云端分支部署&lt;/h2&gt;
+&lt;p&gt;手动将项目编译得到的静态网页 &lt;code&gt;dist&lt;/code&gt; 上传到 GitHub 中, 进入仓库 &lt;code&gt;Settings-GitHub Pages-Build and deployment-Branch&lt;/code&gt; , 选择 &lt;code&gt;jinzhao_release&lt;/code&gt; 作为当前站点的 source.&lt;/p&gt;
+&lt;p&gt;首先运行编译命令, 同时本地预览.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;npm run build
+npx astro preview
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;实时更改的本地预览命令为.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;npm run dev
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;同样于链接 &lt;code&gt;http://localhost:4321/Era_Pass/&lt;/code&gt; 检测生成网页. 检查后变更网络至代理 (如 &lt;code&gt;Clash&lt;/code&gt; 常用端口 &lt;code&gt;7890&lt;/code&gt;), 并将生成静态网页推送至 &lt;code&gt;Github&lt;/code&gt; 云端分支 &lt;code&gt;jinzhao_release&lt;/code&gt; (生成 &lt;code&gt;dist&lt;/code&gt; 静态网站目录剥离为本地临时分支 &lt;code&gt;deploy-branch&lt;/code&gt;, 再覆盖到云端分支).&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git config --global http.proxy http://127.0.0.1:7890
+git config --global https.proxy http://127.0.0.1:7890
+git add dist -f
+git commit -m &quot;Deploy: static site content update&quot;
+git subtree split --prefix dist -b deploy-branch
+git push origin deploy-branch:jinzhao_release --force
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;网页正确运行则将在仓库 &lt;code&gt;Action&lt;/code&gt; 页面出现蓝色 check mark, 否则显示红色 error mark, 成功托管的静态网页可在如下网址 &lt;a href=&quot;https://opticcss.github.io/Era_Pass/&quot;&gt;erapass&lt;/a&gt; 访问.&lt;/p&gt;
+&lt;h2&gt;② 网站基本设置&lt;/h2&gt;
+&lt;h3&gt;字体 | Satoshi 本地加载&lt;/h3&gt;
+&lt;p&gt;在全局设置加入本地字体 (不刻意设置 &lt;code&gt;weights&lt;/code&gt;, 不采用 &lt;code&gt;fontProviders.fontshare()&lt;/code&gt; 以避免依靠网络加载).&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;fonts: [
+	{
+    provider: fontProviders.local(),
+    name: &apos;Satoshi&apos;,
+    cssVariable: &apos;--font-satoshi&apos;,
+    options: {
+		variants: [{
+			src: [&apos;./src/assets/fonts/Satoshi-Variable.ttf&apos;],
+			style: &apos;normal&apos;
+		}]}
+	}
+],
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;题头 | Bezier 旋转&lt;/h3&gt;
+&lt;p&gt;在全局样式表设置加入个人头像的主题旋转, 以适配当前小狗灵的时频世界主题标头. 创建样式表.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;img[alt=Avatar] {
+	-webkit-transition: -webkit-transform 1s cubic-bezier(0.65, 0.05, 0.36, 1);
+	-moz-transition: -moz-transform 1s cubic-bezier(0.65, 0.05, 0.36, 1);
+	-o-transition: -o-transform 1s cubic-bezier(0.65, 0.05, 0.36, 1);
+	-ms-transition: -ms-transform 1s cubic-bezier(0.65, 0.05, 0.36, 1);
+	transition: transform 1s cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+img[alt=Avatar]:hover {
+	-webkit-transform: rotateZ(-360deg);
+	-moz-transform: rotateZ(-360deg);
+	-o-transform: rotateZ(-360deg);
+	-ms-transform: rotateZ(-360deg);
+	transform: rotateZ(-360deg);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;导航 | BlurFilter 毛玻璃&lt;/h3&gt;
+&lt;p&gt;在全局样式表设置加入网页标头的低通模糊. 创建样式表 (&lt;code&gt;.not-top&lt;/code&gt; 筛选顶部元素非置顶情形, 即滚动页面后, &lt;code&gt;dark&lt;/code&gt; 筛选白 / 黑色界面切换).&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;header-component[class*=&quot;astro-&quot;].not-top {
+	--un-border-opacity: 1 !important;
+	background: rgba(255, 255, 255, 0.75) !important;
+	-webkit-backdrop-filter: blur(2px) !important;
+	backdrop-filter: blur(2px) !important;
+}
+html[class*=&quot;dark&quot;] header-component[class*=&quot;astro-&quot;].not-top {
+	background: rgba(28, 28, 29, 0.8) !important;
+	-webkit-backdrop-filter: blur(2px) !important;
+	backdrop-filter: blur(2px) !important;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;文摘 | Quote 随机格言&lt;/h3&gt;
+&lt;p&gt;在文段加入 HTML 标签.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;#x3C;Quote /&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;③ 网页部件设计&lt;/h2&gt;
+&lt;h3&gt;简历 | PDFjs 阅读容器&lt;/h3&gt;
 &lt;p&gt;在网页中置入嵌入式 PDF 阅读器, 承装个人简历的 &lt;code&gt;.pdf&lt;/code&gt; 文件. 包含如下功能.&lt;/p&gt;
 &lt;p&gt;采用 &lt;code&gt;&amp;#x3C;iframe&gt;&lt;/code&gt; 配合 &lt;code&gt;PDF.js&lt;/code&gt; 网页部件实现 PDF 阅读容器, 首先安装 &lt;code&gt;pdfjs-viewer&lt;/code&gt;.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;npm install pdfjs-viewer-element
@@ -35,9 +148,9 @@
 &amp;#x3C;/pdfjs-viewer-element&gt;
 &amp;#x3C;/div&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;学术经历 · 项目简介 · Card 背景框格部件&lt;/h3&gt;
+&lt;h3&gt;经历 | Card 背景框格&lt;/h3&gt;
 &lt;p&gt;含背景的个人经历, 其包含如下功能.&lt;/p&gt;
-&lt;p&gt;利用 &lt;code&gt;Astro&lt;/code&gt; 的 &lt;code&gt;ImageMetadata&lt;/code&gt; 加载功能, 加上 &lt;code&gt;HTMLTag&lt;/code&gt; 及多态 &lt;code&gt;Polymorphic&lt;/code&gt; 特性实现 Card 背景窗格. 首先为 Card 设置类型并加载网页 &lt;code&gt;\asset&lt;/code&gt; 中的图像.&lt;/p&gt;
+&lt;p&gt;利用 &lt;code&gt;Astro&lt;/code&gt; 的 &lt;code&gt;ImageMetadata&lt;/code&gt; 加载功能, 加上 &lt;code&gt;HTMLTag&lt;/code&gt; 及多态 &lt;code&gt;Polymorphic&lt;/code&gt; 特性实现 Card 背景窗格. 首先为 Card 设置类型并加载网页 &lt;code&gt;\asset&lt;/code&gt; 中的图像 (&lt;code&gt;Tag=&apos;a&apos;&lt;/code&gt; 将 Card 设置为可点击链接).&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;type Props&amp;#x3C;Tag extends HTMLTag&gt; = Polymorphic&amp;#x3C;{ as: Tag }&gt; &amp;#x26; {
     heading?: string
     subheading?: string
@@ -47,7 +160,7 @@
     date?: string
     class?: string
 }
-const { as: Tag = &apos;div&apos;, class: className, href, heading, subheading, date, imagePath, altText } = Astro.props
+const { as: Tag = &apos;a&apos;, class: className, href, heading, subheading, date, imagePath, altText } = Astro.props
 const images = import.meta.glob&amp;#x3C;{ default: ImageMetadata }&gt;(
   	[&apos;/src/assets/users/*.{jpeg,jpg,png,gif,avif,webp}&apos;,
   	&apos;/src/assets/experiences/*.{jpeg,jpg,png,gif,avif,webp}&apos;,]
@@ -113,59 +226,12 @@ if (!images[imagePath])
 	&amp;#x3C;slot /&gt;
 &amp;#x3C;/Tag&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;社交媒体 · Icon 内置图标&lt;/h3&gt;
-&lt;p&gt;介绍 email, scholar, GitHub 等社交媒体账号的对应图标.&lt;/p&gt;
-&lt;p&gt;设置全局常量 &lt;code&gt;Icon&lt;/code&gt; (&lt;code&gt;viewBox&lt;/code&gt; 前两数字控制图标平移位置, transform=&quot;scale()&quot; 控制图标缩放大小). 应同时在 &lt;code&gt;\packages\pure\libs\icons.ts&lt;/code&gt; 以及 &lt;code&gt;\node_modules\astro-pure\components\user\Icon.astro&lt;/code&gt; 两路径中完成更改.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;export const BuiltInIcons = {
-	google_scholar:
-    	&apos;&amp;#x3C;svg viewBox=&quot;12 16 32 32&quot; width=&quot;100%&quot; height=&quot;100%&quot;&gt;&amp;#x3C;g transform=&quot;scale(0.07)&quot; transform-origin=&quot;center&quot;&gt;&amp;#x3C;path fill=&quot;currentColor&quot; d=&quot;M343.759 106.662V79.43L363.524 64h-213.89L20.476 176.274h85.656a82 82 0 0 0-.219 6.225c0 20.845 7.22 38.087 21.672 51.861c14.453 13.797 32.252 20.648 53.327 20.648c4.923 0 9.75-.368 14.438-1.024c-2.907 6.5-4.374 12.523-4.374 18.142c0 9.875 4.499 20.43 13.467 31.642c-39.234 2.67-68.061 9.732-86.437 21.163c-10.531 6.5-19 14.704-25.39 24.531c-6.391 9.9-9.578 20.515-9.578 31.962c0 9.648 2.062 18.336 6.219 26.062c4.156 7.726 9.578 14.07 16.312 18.984c6.718 4.968 14.469 9.101 23.219 12.469c8.734 3.344 17.406 5.718 26.061 7.062A167 167 0 0 0 180.555 448c13.469 0 26.953-1.734 40.547-5.187c13.562-3.485 26.28-8.642 38.171-15.493c11.86-6.805 21.515-16.086 28.922-27.718c7.39-11.68 11.094-24.805 11.094-39.336c0-11.016-2.25-21.039-6.75-30.14c-4.468-9.073-9.938-16.542-16.452-22.345c-6.501-5.813-13-11.155-19.516-15.968c-6.5-4.845-12-9.75-16.468-14.813c-4.485-5.046-6.735-10.054-6.735-14.984c0-4.921 1.734-9.672 5.216-14.265c3.455-4.61 7.674-9.048 12.61-13.306c4.937-4.25 9.875-8.968 14.796-14.133c4.922-5.147 9.141-11.827 12.61-20.008c3.485-8.18 5.203-17.445 5.203-27.757c0-13.453-2.547-24.46-7.547-33.314c-.594-1.022-1.218-1.803-1.875-3.022l56.907-46.672v17.119c-7.393.93-6.624 5.345-6.624 10.635V245.96c0 5.958 4.875 10.834 10.834 10.834h3.989c5.958 0 10.833-4.875 10.833-10.834V117.293c0-5.277.778-9.688-6.561-10.63m-107.36 222.48c1.14.75 3.704 2.78 7.718 6.038c4.05 3.243 6.797 5.695 8.266 7.414a444 444 0 0 1 6.376 7.547c2.813 3.375 4.718 6.304 5.718 8.734q1.5 3.717 3.047 8.946a38.3 38.3 0 0 1 1.485 10.562c0 17.048-6.564 29.68-19.656 37.859c-13.125 8.18-28.767 12.274-46.938 12.274c-9.187 0-18.203-1.093-27.063-3.196c-8.843-2.116-17.311-5.336-25.39-9.601c-8.078-4.258-14.577-10.204-19.5-17.797c-4.938-7.64-7.407-16.415-7.407-26.25c0-10.32 2.797-19.29 8.422-26.906c5.594-7.625 12.938-13.391 22.032-17.315c9.063-3.946 18.25-6.742 27.562-8.398a158 158 0 0 1 28.438-2.555c4.47 0 7.936.25 10.405.696c.455.219 3.032 2.07 7.735 5.563c4.704 3.462 7.625 5.595 8.75 6.384zm-3.359-100.579c-7.406 8.86-17.734 13.288-30.953 13.288c-11.86 0-22.298-4.764-31.266-14.312c-9-9.523-15.422-20.328-19.344-32.43c-3.937-12.109-5.906-23.984-5.906-35.648q.002-20.54 10.781-34.976c7.187-9.65 17.5-14.485 30.938-14.485c11.875 0 22.374 5.038 31.437 15.157c9.094 10.085 15.61 21.413 19.517 33.968c3.922 12.54 5.873 24.53 5.873 35.984c0 13.446-3.702 24.61-11.076 33.454z&quot; /&gt;&amp;#x3C;/g&gt;&amp;#x3C;/svg&gt;&apos;,
-	gmail:
-    	&apos;&amp;#x3C;svg viewBox=&quot;20 20 32 32&quot;&gt;&amp;#x3C;g transform=&quot;scale(0.04)&quot; transform-origin=&quot;center&quot;&gt;&amp;#x3C;path d=&quot;M696.022905 317.226952h-37.625501v48.180187h37.625501c76.228288 0 138.285932 62.057645 138.285933 138.285932v226.143921c0 17.297958-14.072915 31.468601-31.468601 31.468601H513.3682c0.6841-3.518229 0.977286-7.036457 0.977286-10.652415V503.7908c0-54.82573-23.943501-104.080931-61.764459-138.285933h124.310746v222.332507c0 0.586371-0.195457 1.172743-0.195457 1.759114 0 25.507158 20.718458 46.225616 46.225616 46.225615s46.225616-20.718458 46.225615-46.225615-19.545715-44.759687-43.977858-45.93243v-323.48158c0-4.202329 3.4205-7.5251 7.5251-7.525101h70.266845v-48.180187h-70.266845c-30.784501 0-55.803016 25.018515-55.803016 55.803016v97.142203H327.879366c-102.81046 0-186.466119 83.655659-186.466119 186.466119v246.862379c0 32.445887 26.386715 58.832602 58.832601 58.832601h602.398932c43.88013 0 79.648788-35.67093 79.648787-79.648788V503.7908c0-102.81046-83.655659-186.466119-186.466119-186.46612zM200.441306 761.207864c-5.863714 0-10.652415-4.7887-10.652415-10.652414V503.693071c0-76.228288 62.057645-138.285932 138.285932-138.285932s138.285932 62.057645 138.285933 138.285932V750.55545c0 5.863714-4.7887 10.652415-10.652415 10.652414H200.539034z&quot; p-id=&quot;3369&quot; fill=&quot;#000000&quot;&gt;&amp;#x3C;/path&gt;&amp;#x3C;path d=&quot;M245.591907 487.470128h139.067761v48.180187H245.591907z&quot; p-id=&quot;3370&quot; fill=&quot;#000000&quot;&gt;&amp;#x3C;/path&gt;&amp;#x3C;/g&gt;&amp;#x3C;/svg&gt;&apos;,
-}
-export const Icons = {
- 	...BuiltInIcons
-}
-export type IconsType = keyof typeof Icons
+&lt;h2&gt;④ 文章部件设计&lt;/h2&gt;
+&lt;h3&gt;隐藏 | Spoiler 块&lt;/h3&gt;
+&lt;p&gt;以 HTML 标签形式加入覆盖块.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;#x3C;Spoiler&gt;隐藏文字&amp;#x3C;/Spoiler&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;并在页脚加入对应的图标模块.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;footer: {
-    social: [
-      { icon: &apos;email&apos;, label: &apos;Email&apos;, href: &apos;mailto:opticscss@gmail.com&apos; },
-      { icon: &apos;google_scholar&apos;, label: &apos;Google Scholar&apos;, href: &apos;https://scholar.google.com/citations?user=6sFE0UQAAAAJ&apos; },
-      { icon: &apos;github&apos;, label: &apos;GitHub&apos;, href: &apos;https://github.com/Opticcss&apos; },
-      { icon: &apos;rss&apos;, label: &apos;RSS&apos;, href: &apos;/Era_Pass/rss.xml&apos; }
-    ]
-  },
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;文章目录 · TOC 列表&lt;/h3&gt;
-&lt;p&gt;加入列表头名及加粗.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;#x3C;toc-heading class={className} {...props}&gt;
-	&amp;#x3C;h2 class=&apos;font-medium&apos; style=&apos;font-size: 1.05em; font-weight: 700;&apos;&gt;Contents&amp;#x3C;/h2&gt;
-	&amp;#x3C;ul class=&apos;mt-4&apos; style=&apos;font-size: 0.95em;&apos;&gt;
-		{toc.map((heading) =&gt; &amp;#x3C;TOCHeading heading={heading} /&gt;)}
-	&amp;#x3C;/ul&gt;
-&amp;#x3C;/toc-heading&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;文章预览 · PostPreview 列表&lt;/h3&gt;
-&lt;p&gt;加入最大预览文章篇数.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;const MAX_POSTS = 5
-const allPosts = await getBlogCollection()
-const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
-
-{allPostsByDate.length &gt; 0 &amp;#x26;&amp;#x26; (
-	&amp;#x3C;Section title=&apos;Recent Art&apos;&gt;
-		&amp;#x3C;ul class=&apos;flex flex-col gap-y-1.5 sm:gap-y-2&apos;&gt;
-			{allPostsByDate.map((p) =&gt; (
-				&amp;#x3C;li class=&apos;flex flex-col gap-x-2 sm:flex-row&apos;&gt;
-					&amp;#x3C;PostPreview post={p} /&gt;
-				&amp;#x3C;/li&gt;
-			))}
-		&amp;#x3C;/ul&gt;
-		&amp;#x3C;Button title=&apos;More Articles&apos; class=&apos;w-fit self-end&apos; href=&apos;/Era_Pass/blog&apos; variant=&apos;ahead&apos; /&gt;
-	&amp;#x3C;/Section&gt;
-)}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;文章代码 · CollapsedCode 折叠块&lt;/h3&gt;
+&lt;h3&gt;代码 | Collapsed 块&lt;/h3&gt;
 &lt;p&gt;首先基于 &lt;code&gt;Shiki&lt;/code&gt; 渲染器配置进一步增添代码触发折叠的逻辑.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;export const addCollapse = (): ShikiTransformer =&gt; {
   const line = 5
@@ -189,7 +255,84 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
     }
 ) as any
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;文章标签 · Tag 链接按钮&lt;/h3&gt;
+&lt;h3&gt;强调 | Aside 块&lt;/h3&gt;
+&lt;p&gt;加入文章的注意, 危险等强调色块 (&lt;code&gt;type&lt;/code&gt; 若不指定则对应采用 note 类型).&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;#x3C;Aside&gt;...&amp;#x3C;/Aside&gt;
+&amp;#x3C;Aside type=&apos;danger&apos;&gt;contents to be noted&amp;#x3C;/Aside&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;媒体 | Icon 常量&lt;/h3&gt;
+&lt;p&gt;介绍 email, scholar, GitHub 等社交媒体账号的对应图标.&lt;/p&gt;
+&lt;p&gt;设置全局常量 &lt;code&gt;Icon&lt;/code&gt; (&lt;code&gt;viewBox&lt;/code&gt; 前两数字控制图标平移位置, transform=&quot;scale()&quot; 控制图标缩放大小). 应同时在 &lt;code&gt;\packages\pure\libs\icons.ts&lt;/code&gt; 以及 &lt;code&gt;\node_modules\astro-pure\components\user\Icon.astro&lt;/code&gt; 两路径中完成更改.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;export const BuiltInIcons = {
+	google_scholar:
+    	&apos;&amp;#x3C;svg viewBox=&quot;12 16 32 32&quot; width=&quot;100%&quot; height=&quot;100%&quot;&gt;&amp;#x3C;g transform=&quot;scale(0.07)&quot; transform-origin=&quot;center&quot;&gt;&amp;#x3C;path fill=&quot;currentColor&quot; d=&quot;M343.759 106.662V79.43L363.524 64h-213.89L20.476 176.274h85.656a82 82 0 0 0-.219 6.225c0 20.845 7.22 38.087 21.672 51.861c14.453 13.797 32.252 20.648 53.327 20.648c4.923 0 9.75-.368 14.438-1.024c-2.907 6.5-4.374 12.523-4.374 18.142c0 9.875 4.499 20.43 13.467 31.642c-39.234 2.67-68.061 9.732-86.437 21.163c-10.531 6.5-19 14.704-25.39 24.531c-6.391 9.9-9.578 20.515-9.578 31.962c0 9.648 2.062 18.336 6.219 26.062c4.156 7.726 9.578 14.07 16.312 18.984c6.718 4.968 14.469 9.101 23.219 12.469c8.734 3.344 17.406 5.718 26.061 7.062A167 167 0 0 0 180.555 448c13.469 0 26.953-1.734 40.547-5.187c13.562-3.485 26.28-8.642 38.171-15.493c11.86-6.805 21.515-16.086 28.922-27.718c7.39-11.68 11.094-24.805 11.094-39.336c0-11.016-2.25-21.039-6.75-30.14c-4.468-9.073-9.938-16.542-16.452-22.345c-6.501-5.813-13-11.155-19.516-15.968c-6.5-4.845-12-9.75-16.468-14.813c-4.485-5.046-6.735-10.054-6.735-14.984c0-4.921 1.734-9.672 5.216-14.265c3.455-4.61 7.674-9.048 12.61-13.306c4.937-4.25 9.875-8.968 14.796-14.133c4.922-5.147 9.141-11.827 12.61-20.008c3.485-8.18 5.203-17.445 5.203-27.757c0-13.453-2.547-24.46-7.547-33.314c-.594-1.022-1.218-1.803-1.875-3.022l56.907-46.672v17.119c-7.393.93-6.624 5.345-6.624 10.635V245.96c0 5.958 4.875 10.834 10.834 10.834h3.989c5.958 0 10.833-4.875 10.833-10.834V117.293c0-5.277.778-9.688-6.561-10.63m-107.36 222.48c1.14.75 3.704 2.78 7.718 6.038c4.05 3.243 6.797 5.695 8.266 7.414a444 444 0 0 1 6.376 7.547c2.813 3.375 4.718 6.304 5.718 8.734q1.5 3.717 3.047 8.946a38.3 38.3 0 0 1 1.485 10.562c0 17.048-6.564 29.68-19.656 37.859c-13.125 8.18-28.767 12.274-46.938 12.274c-9.187 0-18.203-1.093-27.063-3.196c-8.843-2.116-17.311-5.336-25.39-9.601c-8.078-4.258-14.577-10.204-19.5-17.797c-4.938-7.64-7.407-16.415-7.407-26.25c0-10.32 2.797-19.29 8.422-26.906c5.594-7.625 12.938-13.391 22.032-17.315c9.063-3.946 18.25-6.742 27.562-8.398a158 158 0 0 1 28.438-2.555c4.47 0 7.936.25 10.405.696c.455.219 3.032 2.07 7.735 5.563c4.704 3.462 7.625 5.595 8.75 6.384zm-3.359-100.579c-7.406 8.86-17.734 13.288-30.953 13.288c-11.86 0-22.298-4.764-31.266-14.312c-9-9.523-15.422-20.328-19.344-32.43c-3.937-12.109-5.906-23.984-5.906-35.648q.002-20.54 10.781-34.976c7.187-9.65 17.5-14.485 30.938-14.485c11.875 0 22.374 5.038 31.437 15.157c9.094 10.085 15.61 21.413 19.517 33.968c3.922 12.54 5.873 24.53 5.873 35.984c0 13.446-3.702 24.61-11.076 33.454z&quot; /&gt;&amp;#x3C;/g&gt;&amp;#x3C;/svg&gt;&apos;,
+	gmail:
+    	&apos;&amp;#x3C;svg viewBox=&quot;20 20 32 32&quot;&gt;&amp;#x3C;g transform=&quot;scale(0.04)&quot; transform-origin=&quot;center&quot;&gt;&amp;#x3C;path fill=&quot;currentColor&quot; d=&quot;M696.022905 317.226952h-37.625501v48.180187h37.625501c76.228288 0 138.285932 62.057645 138.285933 138.285932v226.143921c0 17.297958-14.072915 31.468601-31.468601 31.468601H513.3682c0.6841-3.518229 0.977286-7.036457 0.977286-10.652415V503.7908c0-54.82573-23.943501-104.080931-61.764459-138.285933h124.310746v222.332507c0 0.586371-0.195457 1.172743-0.195457 1.759114 0 25.507158 20.718458 46.225616 46.225616 46.225615s46.225616-20.718458 46.225615-46.225615-19.545715-44.759687-43.977858-45.93243v-323.48158c0-4.202329 3.4205-7.5251 7.5251-7.525101h70.266845v-48.180187h-70.266845c-30.784501 0-55.803016 25.018515-55.803016 55.803016v97.142203H327.879366c-102.81046 0-186.466119 83.655659-186.466119 186.466119v246.862379c0 32.445887 26.386715 58.832602 58.832601 58.832601h602.398932c43.88013 0 79.648788-35.67093 79.648787-79.648788V503.7908c0-102.81046-83.655659-186.466119-186.466119-186.46612zM200.441306 761.207864c-5.863714 0-10.652415-4.7887-10.652415-10.652414V503.693071c0-76.228288 62.057645-138.285932 138.285932-138.285932s138.285932 62.057645 138.285933 138.285932V750.55545c0 5.863714-4.7887 10.652415-10.652415 10.652414H200.539034z&quot; p-id=&quot;3369&quot; fill=&quot;#000000&quot;&gt;&amp;#x3C;/path&gt;&amp;#x3C;path d=&quot;M245.591907 487.470128h139.067761v48.180187H245.591907z&quot; p-id=&quot;3370&quot; fill=&quot;#000000&quot;&gt;&amp;#x3C;/path&gt;&amp;#x3C;/g&gt;&amp;#x3C;/svg&gt;&apos;,
+}
+export const Icons = {
+ 	...BuiltInIcons
+}
+export type IconsType = keyof typeof Icons
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;并在页脚加入对应的图标模块.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;footer: {
+    social: [
+      { icon: &apos;email&apos;, label: &apos;Email&apos;, href: &apos;mailto:opticscss@gmail.com&apos; },
+      { icon: &apos;google_scholar&apos;, label: &apos;Google Scholar&apos;, href: &apos;https://scholar.google.com/citations?user=6sFE0UQAAAAJ&apos; },
+      { icon: &apos;github&apos;, label: &apos;GitHub&apos;, href: &apos;https://github.com/Opticcss&apos; },
+      { icon: &apos;rss&apos;, label: &apos;RSS&apos;, href: &apos;/Era_Pass/rss.xml&apos; }
+    ]
+  },
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;图标可由如下两类形式引入.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;#x3C;Svg src={import(&apos;@/assets/icons/key.svg?raw&apos;)} /&gt;
+&amp;#x3C;Icon name=&apos;rss&apos; class=&apos;inline&apos; /&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如下为当前网页支持图标常量.&lt;/p&gt;
+&lt;h3&gt;目录 | TOC 列表&lt;/h3&gt;
+&lt;p&gt;加入列表头名及加粗.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;#x3C;toc-heading class={className} {...props}&gt;
+	&amp;#x3C;h2 class=&apos;font-medium&apos; style=&apos;font-size: 1.05em; font-weight: 700;&apos;&gt;Contents&amp;#x3C;/h2&gt;
+	&amp;#x3C;ul class=&apos;mt-4&apos; style=&apos;font-size: 0.95em;&apos;&gt;
+		{toc.map((heading) =&gt; &amp;#x3C;TOCHeading heading={heading} /&gt;)}
+	&amp;#x3C;/ul&gt;
+&amp;#x3C;/toc-heading&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;预览 | PostPreview 表&lt;/h3&gt;
+&lt;p&gt;加入最大预览文章篇数.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;const MAX_POSTS = 5
+const allPosts = await getBlogCollection()
+const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
+
+{allPostsByDate.length &gt; 0 &amp;#x26;&amp;#x26; (
+	&amp;#x3C;Section title=&apos;Recent Art&apos;&gt;
+		&amp;#x3C;ul class=&apos;flex flex-col gap-y-1.5 sm:gap-y-2&apos;&gt;
+			{allPostsByDate.map((p) =&gt; (
+				&amp;#x3C;li class=&apos;flex flex-col gap-x-2 sm:flex-row&apos;&gt;
+					&amp;#x3C;PostPreview post={p} /&gt;
+				&amp;#x3C;/li&gt;
+			))}
+		&amp;#x3C;/ul&gt;
+		&amp;#x3C;Button title=&apos;More Articles&apos; class=&apos;w-fit self-end&apos; href=&apos;/Era_Pass/blog&apos; variant=&apos;ahead&apos; /&gt;
+	&amp;#x3C;/Section&gt;
+)}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;编号 | Steps 表&lt;/h3&gt;
+&lt;p&gt;加入文章有序列表的分点项目.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;#x3C;Steps&gt;
+1. content in the first row.
+    subcontent follows the first row.
+2. content in the second row.
+&amp;#x3C;/Steps&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;选栏 | TabItem 表&lt;/h3&gt;
+&lt;p&gt;加入文章可选列表的选项卡内容.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;#x3C;Tabs&gt; 
+&amp;#x3C;TabItem label=&quot;Stars&quot;&gt;Sirius, Vega, Betelgeuse&amp;#x3C;/TabItem&gt;
+&amp;#x3C;TabItem label=&quot;Moons&quot;&gt;Io, Europa, Ganymede&amp;#x3C;/TabItem&gt;
+&amp;#x3C;/Tabs&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;标签 | Tag 按钮&lt;/h3&gt;
 &lt;p&gt;加入文章 &lt;code&gt;Frontmatter&lt;/code&gt; 的日期, 阅读时间以及标签内容.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;#x3C;div class=&apos;flex items-center gap-1&apos;&gt;
 	&amp;#x3C;Icon name=&apos;calendar&apos; class=&apos;size-5&apos; /&gt;
@@ -212,190 +355,7 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 				&amp;#x3C;/span&gt;
 		)}
 &amp;#x3C;/div&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;文章内容较多时，可以用标题分段：&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;# 标题 1
-
-## 标题 2
-
-## 大标题
-
-### 小标题
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;标题预览会打乱文章的结构，所以在此不展示。&lt;/p&gt;
-&lt;h3&gt;粗斜体&lt;/h3&gt;
-&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;_斜体文本_
-
-**粗体文本**
-
-**_粗斜体文本_**
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;斜体文本&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;粗体文本&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;粗斜体文本&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;h3&gt;链接&lt;/h3&gt;
-&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;文字链接 [链接名称](http://链接网址)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;p&gt;文字链接 &lt;a href=&quot;http://%E9%93%BE%E6%8E%A5%E7%BD%91%E5%9D%80&quot;&gt;链接名称&lt;/a&gt;&lt;/p&gt;
-&lt;h3&gt;行内代码&lt;/h3&gt;
-&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;这是一条 `单行代码`
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;p&gt;这是一条 &lt;code&gt;行内代码&lt;/code&gt;&lt;/p&gt;
-&lt;h3&gt;代码块&lt;/h3&gt;
-&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;```js
-// calculate fibonacci
-function fibonacci(n) {
-  if (n &amp;#x3C;= 1) return 1
-  return fibonacci(n - 1) + fibonacci(n - 2)
-}
-```
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-js&quot;&gt;// calculate fibonacci
-function fibonacci(n) {
-  if (n &amp;#x3C;= 1) return 1
-  return fibonacci(n - 1) + fibonacci(n - 2)
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;当前使用 shiki 作为代码高亮插件，支持的语言请参考 &lt;a href=&quot;https://shiki.matsu.io/languages.html&quot;&gt;shiki / languages&lt;/a&gt;。&lt;/p&gt;
-&lt;h3&gt;行内公式&lt;/h3&gt;
-&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;这是一条行内公式 $e^{i\pi} + 1 = 0$
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;p&gt;这是一条行内公式 $e^{i\pi} + 1 = 0$&lt;/p&gt;
-&lt;h3&gt;公式块&lt;/h3&gt;
-&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;$$
-\hat{f}(\xi) = \int_{-\infty}^{\infty} f(x) e^{-2\pi i x \xi} \, dx
-$$
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;p&gt;$$
-\hat{f}(\xi) = \int_{-\infty}^{\infty} f(x) e^{-2\pi i x \xi} , dx
-$$&lt;/p&gt;
-&lt;p&gt;当前使用 KaTeX 作为数学公式插件，支持的语法请参考 &lt;a href=&quot;https://katex.org/docs/supported.html&quot;&gt;KaTeX Supported Functions&lt;/a&gt;。&lt;/p&gt;
-&lt;h4&gt;图片&lt;/h4&gt;
-&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;![CWorld](https://gravatar.loli.net/avatar/1ffe42aa45a6b1444a786b1f32dfa8aa?s=200)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://gravatar.loli.net/avatar/1ffe42aa45a6b1444a786b1f32dfa8aa?s=200&quot; alt=&quot;CWorld&quot;&gt;&lt;/p&gt;
-&lt;h4&gt;删除线&lt;/h4&gt;
-&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;~~删除线~~
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;p&gt;~~删除线~~&lt;/p&gt;
-&lt;h3&gt;列表&lt;/h3&gt;
-&lt;p&gt;普通无序列表&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;- 1
-- 2
-- 3
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;1&lt;/li&gt;
-&lt;li&gt;2&lt;/li&gt;
-&lt;li&gt;3&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;普通有序列表&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;1. GPT-4
-2. Claude Opus
-3. LLaMa
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;GPT-4&lt;/li&gt;
-&lt;li&gt;Claude Opus&lt;/li&gt;
-&lt;li&gt;LLaMa&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;列表里可以继续嵌套语法&lt;/p&gt;
-&lt;h3&gt;引用&lt;/h3&gt;
-&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;&gt; 枪响，雷鸣，剑起。繁花血景。
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;枪响，雷鸣，剑起。繁花血景。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;引用里也可以继续嵌套语法。&lt;/p&gt;
-&lt;h3&gt;换行&lt;/h3&gt;
-&lt;p&gt;markdown 分段落是需要空一行的。&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;如果不空行
-就会在一段
-
-第一段
-
-第二段
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;p&gt;如果不空行
-就会在一段&lt;/p&gt;
-&lt;p&gt;第一段&lt;/p&gt;
-&lt;p&gt;第二段&lt;/p&gt;
-&lt;h3&gt;分隔符&lt;/h3&gt;
-&lt;p&gt;如果你有写分割线的习惯，可以新起一行输入三个减号&lt;code&gt;---&lt;/code&gt; 或者星号 &lt;code&gt;***&lt;/code&gt;。当前后都有段落时，请空出一行：&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;---
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2&gt;高级技巧&lt;/h2&gt;
-&lt;h3&gt;行内 HTML 元素&lt;/h3&gt;
-&lt;p&gt;目前只支持部分段内 HTML 元素效果，包括 &lt;code&gt;&amp;#x3C;kdb&gt; &amp;#x3C;b&gt; &amp;#x3C;i&gt; &amp;#x3C;em&gt; &amp;#x3C;sup&gt; &amp;#x3C;sub&gt; &amp;#x3C;br&gt;&lt;/code&gt; ，如&lt;/p&gt;
-&lt;h4&gt;键位显示&lt;/h4&gt;
-&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;使用 &amp;#x3C;kbd&gt;Ctrl&amp;#x3C;/kbd&gt; + &amp;#x3C;kbd&gt;Alt&amp;#x3C;/kbd&gt; + &amp;#x3C;kbd&gt;Del&amp;#x3C;/kbd&gt; 重启电脑
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;p&gt;使用 Ctrl + Alt + Del 重启电脑&lt;/p&gt;
-&lt;h4&gt;粗斜体&lt;/h4&gt;
-&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;&amp;#x3C;b&gt; Markdown 在此处同样适用，如 _加粗_ &amp;#x3C;/b&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;p&gt; Markdown 在此处同样适用，如 &lt;em&gt;加粗&lt;/em&gt; &lt;/p&gt;
-&lt;h3&gt;其他 HTML 写法&lt;/h3&gt;
-&lt;h4&gt;折叠块&lt;/h4&gt;
-&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;&amp;#x3C;details&gt;&amp;#x3C;summary&gt;点击展开&amp;#x3C;/summary&gt;它被隐藏了&amp;#x3C;/details&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;h3&gt;表格&lt;/h3&gt;
-&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;| 表头1 | 表头2 |
-| ----- | ----- |
-| 内容1 | 内容2 |
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;p&gt;| 表头1 | 表头2 |
-| ----- | ----- |
-| 内容1 | 内容2 |&lt;/p&gt;
-&lt;h3&gt;注释&lt;/h3&gt;
-&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;在引用的地方使用 [^注释] 来添加注释。
-
-然后在文档的结尾，添加注释的内容（会默认于文章结尾渲染之）。
-
-[^注释]: 这里是注释的内容
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;p&gt;在引用的地方使用 &lt;a href=&quot;%E8%BF%99%E9%87%8C%E6%98%AF%E6%B3%A8%E9%87%8A%E7%9A%84%E5%86%85%E5%AE%B9&quot;&gt;^注释&lt;/a&gt; 来添加注释。&lt;/p&gt;
-&lt;p&gt;然后在文档的结尾，添加注释的内容（会默认于文章结尾渲染之）。&lt;/p&gt;
-&lt;h3&gt;To-Do 列表&lt;/h3&gt;
-&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;- [ ] 未完成的任务
-- [x] 已完成的任务
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;[ ] 未完成的任务&lt;/li&gt;
-&lt;li&gt;[x] 已完成的任务&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;符号转义&lt;/h3&gt;
-&lt;p&gt;如果你的描述中需要用到 markdown 的符号，比如 _ # * 等，但又不想它被转义，这时候可以在这些符号前加反斜杠，如 &lt;code&gt;\_&lt;/code&gt; &lt;code&gt;\#&lt;/code&gt; &lt;code&gt;\*&lt;/code&gt; 进行避免。&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;\_不想这里的文本变斜体\_
-
-\*\*不想这里的文本被加粗\*\*
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;p&gt;_不想这里的文本变斜体_&lt;/p&gt;
-&lt;p&gt;**不想这里的文本被加粗**&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2&gt;内嵌 Astro 组件&lt;/h2&gt;
-&lt;p&gt;See &lt;a href=&quot;/docs/integrations/components&quot;&gt;User Components&lt;/a&gt; and &lt;a href=&quot;/docs/integrations/advanced&quot;&gt;Advanced Components&lt;/a&gt; for details.&lt;/p&gt;</content:encoded><h:img src="/Era_Pass/_astro/building_erapass_.mgO4fl3j.png"/><enclosure url="/Era_Pass/_astro/building_erapass_.mgO4fl3j.png"/></item><item><title>Tips to improve concentration</title><link>https://opticcss.github.io/blog/improve-concentration</link><guid isPermaLink="true">https://opticcss.github.io/blog/improve-concentration</guid><description>Mindfulness, cognitive training, and a healthy lifestyle may help sharpen your focus.</description><pubDate>Fri, 09 May 2025 16:00:00 GMT</pubDate><content:encoded>&lt;p&gt;import { Aside } from &apos;astro-pure/user&apos;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;</content:encoded><h:img src="/Era_Pass/_astro/building_erapass_.mgO4fl3j.png"/><enclosure url="/Era_Pass/_astro/building_erapass_.mgO4fl3j.png"/></item><item><title>Tips to improve concentration</title><link>https://opticcss.github.io/blog/improve-concentration</link><guid isPermaLink="true">https://opticcss.github.io/blog/improve-concentration</guid><description>Mindfulness, cognitive training, and a healthy lifestyle may help sharpen your focus.</description><pubDate>Fri, 09 May 2025 16:00:00 GMT</pubDate><content:encoded>&lt;p&gt;import { Aside } from &apos;astro-pure/user&apos;&lt;/p&gt;
 &lt;p&gt;You&apos;re trying to concentrate, but your mind is wandering or you&apos;re easily distracted. What happened to the laser-sharp focus you once enjoyed? As we age, we tend to have more difficulty filtering out stimuli that are not relevant to the task at hand.&lt;/p&gt;
 &lt;h2&gt;What&apos;s fogging up focus?&lt;/h2&gt;
 &lt;p&gt;Like a computer that slows with use, the brain accumulates wear and tear that affects processing. This can be caused by a number of physiological stressors such as inflammation, injury to blood vessels (especially if you have high blood pressure), the buildup of abnormal proteins, and naturally occurring brain shrinkage.&lt;/p&gt;
